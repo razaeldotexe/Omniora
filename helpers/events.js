@@ -210,19 +210,27 @@ export default class EventEmitter {
 
       const checks = [
         {
-          condition: ev.isOwner && !(this.is.owner||this.is.coowner),
+          condition: ev.isOwner && !(this.is.owner || this.is.coowner),
           message:
             typeof ev.isOwner === 'boolean' ? messages.isOwner : ev.isOwner,
         },
         {
-          condition: 'isCoOwner' in ev && ev.isCoOwner && !(this.is.coowner||this.is.owner),
+          condition:
+            'isCoOwner' in ev &&
+            ev.isCoOwner &&
+            !(this.is.coowner || this.is.owner),
           message:
-            typeof ev.isCoOwner === 'boolean' ? messages.isOwner.replace('owner','coowner') : ev.isOwner,
+            typeof ev.isCoOwner === 'boolean'
+              ? messages.isOwner.replace('owner', 'coowner')
+              : ev.isOwner,
         },
         {
-          condition: 'isCoOwner' in ev && ev.isCoOwner == false && this.is.coowner && !this.is.owner,
-          message:
-           'CoOwner is not allowed!'
+          condition:
+            'isCoOwner' in ev &&
+            ev.isCoOwner == false &&
+            this.is.coowner &&
+            !this.is.owner,
+          message: 'CoOwner is not allowed!',
         },
         {
           condition: ev.isGroup && !this.is.group,

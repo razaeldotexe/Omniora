@@ -25,6 +25,7 @@ Data.notify = Data.notify || {
   first: !1,
 };
 Data.queueMetadata ??= [];
+const saving = new Set();
 
 export default async function detector({ Exp, store }) {
   const { func } = Exp;
@@ -388,8 +389,18 @@ Semoga puasa kita diterima Allah dan diberikan kekuatan serta kelancaran sepanja
   }
 
   async function saveData(name) {
+    if (saving.has(name)) return;
+    saving.add(name);
+
     try {
-      let data = name === 'cmd' ? Data.use.cmds : Data[name];
+      let data = name === 'cmd' ? Data.use?.cmds : Data[name];
+
+      if (data === undefined) {
+        console.warn(
+          `detector.js > saveData > [SAVE] ${name} undefined, skipped`
+        );
+        return;
+      }
 
       if (Data.mongo) {
         await Data.mongo.db.set(name, data);
@@ -397,19 +408,31 @@ Semoga puasa kita diterima Allah dan diberikan kekuatan serta kelancaran sepanja
       }
 
       const baseDir = ['users', 'inventories'].includes(name) ? fol[6] : db;
+      await fs.promises.mkdir(baseDir, { recursive: true });
+
       const filepath = path.resolve(baseDir, `${name}.json`);
+      const tmp = filepath + '.tmp';
 
-      const raw = JSON.stringify(data);
-      const size = Buffer.byteLength(raw);
+      let raw;
+      try {
+        raw = JSON.stringify(data, null, 2);
+      } catch (e) {
+        console.error(
+          `Error in detector.js > saveData > STRINGIFY ERROR ${name}:`,
+          e
+        );
+        return;
+      }
 
-      const content = size > 50 * 1024 ? raw : JSON.stringify(data, null, 2);
-
-      await fs.promises.writeFile(filepath, content);
+      await fs.promises.writeFile(tmp, raw);
+      await fs.promises.rename(tmp, filepath);
     } catch (e) {
-      console.error('Error in detector.js > saveData:', e);
-      throw e;
+      console.error(`Error in detector.js > saveData > SAVE ERROR ${name}:`, e);
+    } finally {
+      saving.delete(name);
     }
   }
+
   async function updateHargaInvestasi() {
     try {
       const inflasiAktif = cfg.rpg?.inflasi;
@@ -861,7 +884,7 @@ Semoga puasa kita diterima Allah dan diberikan kekuatan serta kelancaran sepanja
               `• Silakan lakukan perpanjangan sebelum grace berakhir\n\n` +
               `Jika masa grace habis dan belum diperpanjang,\n` +
               `akses bot akan *dinonaktifkan sepenuhnya*.`,
-            mentions: participants.map(a => a.id),
+            mentions: participants.map((a) => a.id),
           });
 
           continue;
@@ -877,7 +900,7 @@ Semoga puasa kita diterima Allah dan diberikan kekuatan serta kelancaran sepanja
                 `Masa suspend telah *habis* dan sewa bot *tidak diperpanjang*.\n\n` +
                 `❌ *Bot otomatis keluar dari grup ini!!*\n`,
               footer: `💬 Silakan hubungi owner untuk melakukan perpanjangan.`,
-              mentions: participants.map(a => a.id),
+              mentions: participants.map((a) => a.id),
             });
             await sleep(1000);
             await func.metadata.delete(id);
@@ -901,6 +924,7 @@ Semoga puasa kita diterima Allah dan diberikan kekuatan serta kelancaran sepanja
 
   cfg.keyChecker ??= true;
   keys['detector'] = setInterval(async () => {
+    let start = Date.now();
     let total = 0;
     const errors = [];
     const success = [];
@@ -978,11 +1002,11 @@ Semoga puasa kita diterima Allah dan diberikan kekuatan serta kelancaran sepanja
         console.log(chalk.red(` - ${err.name}: ${err.msg}`));
       }
     } else {
-      /* console.log(
+      console.log(
         chalk.green(
-          `[DETECTOR] OK (${success.length == total ? 'All' : success.length} tasks)`
+          `[DETECTOR] OK (${success.length == total ? 'All' : success.length} tasks) ${Date.now() - start}ms`
         )
-      );*/
+      );
     }
   }, 20000);
 }

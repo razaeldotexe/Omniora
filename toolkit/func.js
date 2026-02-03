@@ -352,28 +352,27 @@ export class func {
       }
     */
     if (hasData && !update) return metadata.metadata;
-    if (
-      hasData &&
-      metadata.timestamp &&
-      now - metadata.timestamp < METADATA_RETRIEVAL_DISTANCE
-    ) {
+    if (hasData) {
       let index = Data.queueMetadata.findIndex((a) => a.id == chtId);
+
       if (index >= 0) {
         //biar gak duplikat, 1 grup 1x update aja
         Data.queueMetadata[index].run = () =>
-          this.getGroupMetadata(chtId, Exp, update);
+          this.getGroupMetadata(chtId, Exp, true);
       } else {
         //masukin ke queue biar gak kena limit
         Data.queueMetadata.push({
           id: chtId,
-          run: () => this.getGroupMetadata(chtId, Exp, update),
+          run: () => this.getGroupMetadata(chtId, Exp, true),
         });
+
         console.log(
           `${this.color.blue('[GROUP_METADATA_MANAGER]')}\n` +
-            `  ${this.color.white('Queue:')} ${this.color.cyan(chtId)}\n` +
-            `  ${this.color.white('Status:')} Waiting for metadata fetch`
+            `  Queue: ${chtId}\n` +
+            `  Status: Waiting`
         );
       }
+
       return metadata.metadata;
     }
 

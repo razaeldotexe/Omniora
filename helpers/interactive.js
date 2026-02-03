@@ -147,7 +147,7 @@ export default async function In({ cht, Exp, store, is, ev, chatDb, sewaDb }) {
       (cht.quoted ? true : cht.msg.includes('@')) &&
       cht.mention?.some((a) => memories.getItem(a, 'afk') && a !== sender) &&
       !is.me &&
-      !is.owner && 
+      !is.owner &&
       !is.coowner &&
       is.group;
     let isAntilink = is.antilink && (downCmd ? is.url.length > 1 : true);
@@ -1203,7 +1203,14 @@ export default async function In({ cht, Exp, store, is, ev, chatDb, sewaDb }) {
         break;
     }
     keys.isBack ??= {};
-    if (chatDb.autoback && _url && is.group && !is.admin && !is.owner && !is.coowner ) {
+    if (
+      chatDb.autoback &&
+      _url &&
+      is.group &&
+      !is.admin &&
+      !is.owner &&
+      !is.coowner
+    ) {
       try {
         let inviteMatch = _url.match(/chat\.whatsapp\.com\/([\w-]+)/);
         if (!inviteMatch) return;

@@ -213,11 +213,11 @@ export default async function utils({ Exp, cht, is, store }) {
         return jid && jid + from.sender === cht.sender;
       }) || is.me;
     is.coowner = global.coowner.some((a) => {
-        const jid = String(a)
-          ?.split('@')[0]
-          ?.replace(/[^0-9]/g, '');
-        return jid && jid + from.sender === cht.sender;
-      })
+      const jid = String(a)
+        ?.split('@')[0]
+        ?.replace(/[^0-9]/g, '');
+      return jid && jid + from.sender === cht.sender;
+    });
     is.group = cht.id?.endsWith(from.group);
     const groupDb = is.group ? Data.preferences[cht.id] : {};
     if (is.group) {
@@ -402,7 +402,11 @@ export default async function utils({ Exp, cht, is, store }) {
       !is.me &&
       !is.groupAdmins;
     is.bancmd =
-      cht.cmd && groupDb?.cmdblocked?.includes(cht.cmd) && !is.owner && !is.coowner && !is.me;
+      cht.cmd &&
+      groupDb?.cmdblocked?.includes(cht.cmd) &&
+      !is.owner &&
+      !is.coowner &&
+      !is.me;
 
     is.spam =
       groupDb?.antispam &&

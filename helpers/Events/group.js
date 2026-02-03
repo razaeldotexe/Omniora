@@ -1,5 +1,6 @@
 /*!-======[ Module Imports ]======-!*/
 const fs = 'fs'.import();
+const baileys = 'baileys'.import();
 
 /*!-======[ Default Export Function ]======-!*/
 export default async function on({ cht, Exp, store, ev, is, chatDb }) {
@@ -1884,4 +1885,83 @@ Example:
       }
     }
   );
+  
+  ev.on(
+    {
+      cmd: ['upswgc', 'swgroup', 'swgc'],
+      listmenu: ['swgc'],
+      tag: 'group',
+      isGroup: true
+    },
+    async ({ args }) => {
+      try {
+        let { quoted, type: mediaType } = ev.getMediaType(cht)
+        let caption = args || null
+        let messageSecret = await 'crypto'.import().then(a => a.randomBytes(32))
+
+        await Exp.sendMessage(
+          id,
+          {
+            react: {
+              text: '📤', 
+              key: cht.key 
+            }
+          }
+        )
+        
+        let content = { text: caption || 'Haii semua!! yang buat sw ini adalah ' + cht.pushName }
+        
+        if (quoted && mediaType) {
+          let media = await cht.quoted.download()
+          switch (mediaType) {
+            case 'sticker':
+            case 'image':
+            case 'video':
+              content = { [mediaType]: media, caption }
+              break
+            case 'audio':
+              content = { audio: media, mimetype: 'audio/mpeg', ptt: false }
+              break
+            }
+          }
+
+        let inside = await baileys.generateWAMessageContent(content, {
+          upload: Exp.waUploadToServer,
+        })
+
+        const m = baileys.generateWAMessageFromContent(
+          id,
+          {
+           groupStatusMessageV2: {
+              message: {
+                ...inside,
+                messageContextInfo: { messageSecret },
+              },
+            },
+          }, {}
+        )
+
+        await Exp.relayMessage(
+          id,
+          m.message, 
+          { messageId: m.key.id }
+        )
+      
+        await Exp.sendMessage(
+          id,
+          { 
+            react: { 
+              text: '✅',
+              key: cht.key 
+            }
+          }
+        )
+
+        return cht.reply(`✅ Berhasil membuat status grup${caption ? `\ncaption: ${caption}` : ''}`)
+      
+      } catch (e) {
+        return cht.reply("Gagal membuat status grup\n\n*Error:*\n" + e)
+      }
+    }
+  )
 }

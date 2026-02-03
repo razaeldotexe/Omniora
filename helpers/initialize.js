@@ -220,7 +220,6 @@ export default async function initialize({ Exp, store }) {
               ],
             }
           : {};
-
       msg = await Exp.relayMessage(id, message, relayOptions);
 
       return {

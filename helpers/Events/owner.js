@@ -1527,7 +1527,7 @@ export default async function on({ cht, Exp, store, ev, is }) {
 
         text = `*${Data.spinner[i++]}[ 🛠️ ] UPDATE*\n\n${changed}${modifed}${newfile}\n`;
         await cht.edit(text, keys[sender]);
-        await sleep(750)
+        await sleep(750);
       }
 
       if (failed.length > 12) text += failed;
@@ -1536,7 +1536,7 @@ export default async function on({ cht, Exp, store, ev, is }) {
     }
   );
 
-  ev.on(
+  /*ev.on(
     {
       cmd: ['upswgc'],
       listmenu: ['upswgc'],
@@ -1638,7 +1638,7 @@ export default async function on({ cht, Exp, store, ev, is }) {
         });
       }
     }
-  );
+  ); */
 
   ev.on(
     {
