@@ -1407,7 +1407,9 @@ export class func {
     return (
       args.match(
         /(https?:\/\/)?[^\s]+\.(com|net|org|edu|gov|mil|int|info|biz|pro|name|xyz|id|co|io|ai|app|dev|tech|cloud|online|site|store|shop|blog|me|tv|live|fun|lol|icu|top|click|link|digital|media|news|press|wiki|work|agency|software|systems|network|email|services|support|solutions|group|company|finance|capital|investments|ventures|trade|exchange|market|academy|school|college|university|health|care|clinic|hospital|pharmacy|legal|law|attorney|accountant|tax|consulting|engineering|construction|property|realestate|house|homes|rent|auction|energy|solar|green|eco|bio|farm|food|restaurant|cafe|bar|coffee|pizza|beer|wine|fashion|style|beauty|makeup|hair|spa|salon|fitness|gym|sport|football|basketball|tennis|golf|racing|motor|auto|car|bike|travel|tour|vacation|holiday|hotel|hostel|flight|air|sea|cruise|space|science|tech|ai|ml|data|crypto|blockchain|nft|web3|dao)(\/[^\s]*)?/gi
-      ) || []
+      ) || 
+        args?.match(/https?:\/\/[^\s)]+/g) || 
+      []
     ).map((url) =>
       (url.startsWith('http') ? url : 'https://' + url).replace(/['"`<>]/g, '')
     );
