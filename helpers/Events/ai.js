@@ -667,7 +667,7 @@ ${loraText}
 
   ev.on(
     {
-      cmd: ['bell', 'autoai', 'aichat', 'ai_interactive'],
+      cmd: ['jega', 'autoai', 'aichat', 'ai_interactive'],
       tag: 'ai',
       listmenu: ['autoai'],
     },
