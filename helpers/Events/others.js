@@ -28,7 +28,7 @@ export default async function on({ cht, Exp, store, ev, is }) {
 
       let eventKey = Object.keys(events);
       let totalCmd = eventKey.length;
-      let head = `*INFO*\n- \`\`\`${hit.total}\`\`\` Hit Emitter\n- \`\`\`${hit.ai_response}\`\`\` Ai response\n\n*Relationship*\n- Status: _${cht.memories.role}_\n- Mood: ${cht.memories.energy}${cht.memories.energy < 10 ? '😪' : '⚡'}\n\n*Events On*\n- Total: ${totalCmd}\n\n ▪︎ 『 \`Top Cmd \`』\n> ${'`'}${topcmd.join('`\n> `')}${'`'}\n\n`;
+      let head = `*INFO*\n- \`\`\`${hit.total}\`\`\` Hit Emitter\n- \`\`\`${hit.ai_response}\`\`\` Ai response\n\n*Relationship*\n- Status: _${cht.memories.role}_\n- Mood: \`\`\`${cht.memories.energy}${cht.memories.energy < 10 ? '😪' : '⚡'}\`\`\`\n\n*Events On*\n- Total: \`\`\`${totalCmd}\`\`\`\n\n*Top Cmd*\n> ${'```'}${topcmd.join('```\n> ```')}${'```'}\n\n`;
       let text =
         head +
         `${args.includes('reaction') ? '' : func.menuFormatter(events, { ...cfg.menu, ...cht }) + '\n'}${Data.infos.reaction.menu}`;
@@ -85,8 +85,8 @@ export default async function on({ cht, Exp, store, ev, is }) {
                 bottom_sheet: {
                   in_thread_buttons_limit: 2,
                   divider_indices: [1, 2, 3, 4, 5, 999],
-                  list_title: 'All Tag',
-                  button_title: 'View List',
+                  list_title: 'List Menu',
+                  button_title: 'List Menu',
                 },
               }.String(),
             },
@@ -95,8 +95,8 @@ export default async function on({ cht, Exp, store, ev, is }) {
               participant: cht.key.participant,
               quotedMessage: cht,
               forwardedNewsletterMessageInfo: cfg.chId || {
-                newsletterJid: '120363301254798220@newsletter',
-                newslettedName: 'Termai',
+                newsletterJid: '120363405559888765@newsletter',
+                newslettedName: 'ELFx',
                 serverMessageId: 152,
               },
             },
