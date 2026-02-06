@@ -1,9 +1,9 @@
 {
   "owner": ["6282225907841"],
   "coowner": ["6283170087642"],
-  "botname": "ELFx",
-  "botfullname": "Razael Fox",
-  "botnickname": "Foxy",
+  "botname": "Miku - Fan Bot",
+  "botfullname": "Hatsune Miku",
+  "botnickname": "Miku",
   "ownername": "Razael",
   "locale": "id",
   "cfg": {
@@ -12,7 +12,7 @@
       "group": true,
       "private": true,
       "energy": false,
-      "partResponse": true
+      "partResponse": false
     },
     "autotyping": false,
     "autoreadpc": true,
