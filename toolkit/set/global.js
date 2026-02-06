@@ -69,7 +69,7 @@ if (!(config.cfg.ai_interactive?.group || config.cfg.ai_interactive?.private)) {
   };
   config.cfg.ai_interactive.private = true;
 }
-config.coowner ??=[]
+config.coowner ??= [];
 let keys = Object.keys(config);
 
 if (mongoURI && mongoURI.length > 5) {
