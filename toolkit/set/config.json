@@ -44,29 +44,29 @@
         "foot": "└"
       },
       "tags": {
-        "ai": "*<🧠Artificial Intelegen>*",
-        "downloader": "*<📥Media Downloader>*",
-        "group": "*<🏢Only Group!>*",
-        "maker": "*<🖨Maker>*",
-        "owner": "*<👤Only owner!>*",
-        "religion": "*<☪️Religion>*",
-        "game": "*<🎮Game>*",
-        "RPG": "*<🗺RPG Survival>*",
-        "tools": "*<🛠Tools>*",
-        "search": "*<🔍Search>*",
-        "art": "*<🌌Art Works>*",
-        "stablediffusion": "*<🫧Stable Diffusion (AI)>*",
-        "tts": "*<🗣Text To Speech (AI)>*",
-        "voice_changer": "*<🎙Voice Changer (AI)>*",
-        "other": "*<Others>*",
-        "bluearchive": "*<Blue Archive TTS (AI)*",
-        "relationship": "*<💍Relationship>*",
-        "converter": "*<🔀 Converter>*"
+        "ai": "*🧠Artificial Intelegen*",
+        "downloader": "*📥Media Downloader*",
+        "group": "*🏢Only Group!*",
+        "maker": "*🖨Maker*",
+        "owner": "*👤Only owner!*",
+        "religion": "*☪️Religion*",
+        "game": "*🎮Game*",
+        "RPG": "*🗺RPG Survival*",
+        "tools": "*🛠Tools*",
+        "search": "*🔍Search*",
+        "art": "*🌌Art Works*",
+        "stablediffusion": "*🫧Stable Diffusion (AI)*",
+        "tts": "*🗣Text To Speech (AI)*",
+        "voice_changer": "*🎙Voice Changer (AI)*",
+        "other": "*Others*",
+        "bluearchive": "*Blue Archive TTS (AI)*",
+        "relationship": "*💍Relationship*",
+        "converter": "*🔀 Converter*"
       },
       "chId": {
-        "newsletterJid": "120363301254798220@newsletter",
+        "newsletterJid": "120363405559888765@newsletter",
         "serverMessageId": 471,
-        "newsletterName": "Termai ▪︎ Information ✨🌙"
+        "newsletterName": "ELFx"
       },
       "video": "https://c.termai.cc/v61/灱Jzn東9捡"
     },
@@ -76,7 +76,7 @@
     "similarCmd": true,
     "ai_voice": "echilling",
     "voice": "bella",
-    "menu_type": "gif+linkpreview",
+    "menu_type": "buttonListImage",
     "hadiah": {
       "tebakgambar": 35,
       "tebakanime": 35,
