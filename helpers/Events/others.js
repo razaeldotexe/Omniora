@@ -35,7 +35,7 @@ export default async function on({ cht, Exp, store, ev, is }) {
       let menu = {};
       if (cfg.button && cfg?.menu_type == 'buttonListImage') {
         keys['bell_jpg'] ??= await func.uploadToServer(
-          fs.readFileSync(fol[3] + 'thumbnail.jpg')
+          fs.readFileSync(fol[3] + 'thefuckingbanner_simple [F4198EB].png')
         );
         let quick_reply = [];
         for (let i of Object.values(Data.events)
@@ -77,9 +77,9 @@ export default async function on({ cht, Exp, store, ev, is }) {
               ],
               messageParamsJson: {
                 limited_time_offer: {
-                  text: 'Artificial Intelligence, The beginning of the robot era',
+                  text: 'Hatsune Miku: Melodi Masa Depan.',
                   url: 'https://termai.cc',
-                  copy_code: 'Termai',
+                  copy_code: 'Miku',
                   expiration_time: Date.now() + func.parseTimeString('1 hari'),
                 },
                 bottom_sheet: {
@@ -97,7 +97,7 @@ export default async function on({ cht, Exp, store, ev, is }) {
               forwardedNewsletterMessageInfo: cfg.chId || {
                 newsletterJid: '120363405559888765@newsletter',
                 newslettedName: 'ELFx',
-                serverMessageId: 152,
+                serverMessageId: 122,
               },
             },
           },
